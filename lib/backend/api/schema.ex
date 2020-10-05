@@ -10,5 +10,11 @@ defmodule Backend.API.Schema do
     field :posts, list_of(:post) do
       resolve(&Resolvers.Content.list_posts/3)
     end
+
+    field :nodes, list_of(:node) do
+      arg(:offset, :integer)
+      arg(:limit, :integer)
+      resolve(&Resolvers.Node.list/3)
+    end
   end
 end
