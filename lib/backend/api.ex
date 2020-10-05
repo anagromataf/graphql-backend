@@ -5,15 +5,8 @@ defmodule Backend.API do
   plug(:match)
   plug(:dispatch)
 
-  plug(Plug.Parsers,
-    parsers: [:urlencoded, :multipart, :json, Absinthe.Plug.Parser],
-    pass: ["*/*"],
-    json_decoder: Jason
-  )
-
   forward("/api",
-    to: Absinthe.Plug,
-    init_opts: [schema: Backend.API.Schema]
+    to: Backend.API.GQL
   )
 
   forward("/graphiql",
